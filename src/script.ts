@@ -164,7 +164,7 @@ function key(e): void{
 			}
 			break;
 		case 'S':
-			if (sz > 1){
+			if (sz > 1.5){
 				sz -= 1.5;
 			}
 			break;
