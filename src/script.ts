@@ -87,8 +87,8 @@ function getWheel(e){
 	if (mouseZ < -5) {
 		mouseZ = -5;
 	}
-	if (mouseZ > 80) {
-		mouseZ = 80;
+	if (mouseZ > 90) {
+		mouseZ = 90;
 	}
 	if (mouseDown){
 		let newline : Line = {color:currentColor, width:sz, x1:mouseX, y1:mouseY,z1:oldZ, x2:mouseX, y2:mouseY, z2:mouseZ};
@@ -105,18 +105,16 @@ function down(e)
 function click(e)
 {
 	mouseDown = false;
-	//let randomColor:string = Math.floor(Math.random()*16777215).toString(16);
-	//currentColor = "#" + randomColor;
 
+	lines.push(currentSpot);
 	currentSpot = {color:currentColor, width:sz,x1:0,y1:0,z1:0,x2:0,y2:0,z2:0};
+	
 }
 
 function key(e): void{
 	let k:number = e.which || e.keyCode;
 	let key:string = String.fromCharCode(k);
 	
-	console.log(confirmClear);
-
 	if (key === "R") {
 		if (confirmClear){
 			lines = [];
@@ -161,20 +159,18 @@ function key(e): void{
 			currentColor = '#FFFFFF';
 			break;
 		case 'W':
-			console.log(sz);
-			if (sz < 40){
-				sz += 1;
+			if (sz < 120){
+				sz += 1.5;
 			}
 			break;
 		case 'S':
 			if (sz > 1){
-				sz -= 1;
+				sz -= 1.5;
 			}
 			break;
 		default:
 			//do nothing
 	}
-	console.log(currentColor);
 	currentSpot.color = currentColor;
 	currentSpot.width = sz;
 }

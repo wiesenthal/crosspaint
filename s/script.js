@@ -59,8 +59,8 @@ function getWheel(e) {
     if (mouseZ < -5) {
         mouseZ = -5;
     }
-    if (mouseZ > 90) {
-        mouseZ = 90;
+    if (mouseZ > 80) {
+        mouseZ = 80;
     }
     if (mouseDown) {
         var newline = { color: currentColor, width: sz, x1: mouseX, y1: mouseY, z1: oldZ, x2: mouseX, y2: mouseY, z2: mouseZ };
@@ -73,12 +73,14 @@ function down(e) {
 }
 function click(e) {
     mouseDown = false;
-    lines.push(currentSpot);
+    //let randomColor:string = Math.floor(Math.random()*16777215).toString(16);
+    //currentColor = "#" + randomColor;
     currentSpot = { color: currentColor, width: sz, x1: 0, y1: 0, z1: 0, x2: 0, y2: 0, z2: 0 };
 }
 function key(e) {
     var k = e.which || e.keyCode;
     var key = String.fromCharCode(k);
+    console.log(confirmClear);
     if (key === "R") {
         if (confirmClear) {
             lines = [];
@@ -122,18 +124,20 @@ function key(e) {
             currentColor = '#FFFFFF';
             break;
         case 'W':
-            if (sz < 120) {
-                sz += 1.5;
+            console.log(sz);
+            if (sz < 40) {
+                sz += 1;
             }
             break;
         case 'S':
             if (sz > 1) {
-                sz -= 1.5;
+                sz -= 1;
             }
             break;
         default:
         //do nothing
     }
+    console.log(currentColor);
     currentSpot.color = currentColor;
     currentSpot.width = sz;
 }

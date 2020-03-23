@@ -1,3 +1,4 @@
 cd src
-tsc script.ts
+npx tsc script.ts
+cd ..
 start index.html
