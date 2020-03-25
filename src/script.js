@@ -2,8 +2,6 @@ var sz = 15;
 var mouseX;
 var mouseY;
 var mouseZ = 15;
-//let randomColor:string = Math.floor(Math.random()*16777215).toString(16);
-//var currentColor:string = "#" + randomColor;
 var currentColor = "#ffffff";
 var mouseDown = false;
 var confirmClear = false;
@@ -121,6 +119,38 @@ function key(e) {
         case '9':
             currentColor = '#FFFFFF';
             break;
+        case '0':
+            var randomColor = Math.floor(Math.random() * 16777215).toString(16);
+            currentColor = "#" + randomColor;
+            break;
+        case 'C':
+            var oldZ = mouseZ;
+            mouseZ -= 1.5;
+            if (mouseZ < -5) {
+                mouseZ = -5;
+            }
+            if (mouseZ > 90) {
+                mouseZ = 90;
+            }
+            if (mouseDown) {
+                var newline = { color: currentColor, width: sz, x1: mouseX, y1: mouseY, z1: oldZ, x2: mouseX, y2: mouseY, z2: mouseZ };
+                lines.push(newline);
+            }
+            break;
+        case 'X':
+            var oldZ2 = mouseZ;
+            mouseZ += 1.5;
+            if (mouseZ < -5) {
+                mouseZ = -5;
+            }
+            if (mouseZ > 90) {
+                mouseZ = 90;
+            }
+            if (mouseDown) {
+                var newline = { color: currentColor, width: sz, x1: mouseX, y1: mouseY, z1: oldZ2, x2: mouseX, y2: mouseY, z2: mouseZ };
+                lines.push(newline);
+            }
+            break;
         case 'W':
             if (sz < 120) {
                 sz += 1.5;
@@ -166,15 +196,15 @@ function draw(ctxL, ctxR) {
         //show controls
         var controls = { color: "#000", width: border + 180, x1: 0, y1: border, z1: 0, x2: ctxL.canvas.width, y2: border, z2: 0 };
         drawLine(ctxL, ctxR, controls);
-        drawText(ctxL, ctxR, "Left click and hold to draw. Press R twice to reset.", 30, border * 2, border, 0);
-        drawText(ctxL, ctxR, "Use the scroll wheel to change distance.", 30, border * 2, border + 40, 0);
-        drawText(ctxL, ctxR, "Press 1-9 to change color, W or S to change size.", 30, border * 2, border + 80, 0);
+        drawText(ctxL, ctxR, "Left click and hold to draw. Press R twice to reset.", 20, border * 2, border, 0);
+        drawText(ctxL, ctxR, "Use the scroll wheel to change distance. (Or 'X'/'C')", 20, border * 2, border + 40, 0);
+        drawText(ctxL, ctxR, "Press 1-9 to change color, W or S to change size.", 20, border * 2, border + 80, 0);
         if (ticks / fps < 6) {
             //tell to crossview
-            drawText(ctxL, ctxR, "CROSS", 100, 300, 300, 0);
-            drawText(ctxL, ctxR, "YOUR", 100, 320, 420, 20);
-            drawText(ctxL, ctxR, "EYES", 100, 330, 540, 20);
-            drawText(ctxL, ctxR, "NOW", 100, 335, 660, 0);
+            drawText(ctxL, ctxR, "CROSS", 80, 300, 300, 0);
+            drawText(ctxL, ctxR, "YOUR", 80, 320, 420, 20);
+            drawText(ctxL, ctxR, "EYES", 80, 330, 540, 20);
+            drawText(ctxL, ctxR, "NOW", 80, 335, 660, 0);
         }
     }
     ticks++;
